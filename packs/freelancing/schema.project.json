@@ -1,1 +1,425 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://example.org/packs/freelancing/schema.project.json",
+  "title": "Freelance Business — 16-Step Framework",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["meta", "step0", "step1", "step2", "step3", "step4", "step5", "step5a", "step6", "step7", "step7a", "step9", "step9a", "step10", "step11", "step12", "step13", "step14", "step15", "step16"],
+  "properties": {
+    "meta": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["name", "goal_90d", "region", "language", "eu_privacy"],
+      "properties": {
+        "name": { "type": "string", "minLength": 2 },
+        "goal_90d": { "type": "string", "description": "North Star / 90-day outcome" },
+        "region": { "type": "string", "description": "Primary operating country/market (ISO or plain)" },
+        "language": { "type": "string", "default": "en" },
+        "eu_privacy": { "type": "boolean", "default": false },
+        "notes": { "type": "string" },
+        "_provenance": {
+          "type": "object",
+          "additionalProperties": false,
+          "properties": {
+            "schema_version": { "type": "string", "default": "1.0.0" },
+            "pack_id": { "type": "string", "default": "freelancing-v2" },
+            "created_at": { "type": "string", "format": "date-time" },
+            "model_used": { "type": "string" },
+            "input_hash": { "type": "string" }
+          }
+        }
+      }
+    },
 
+    "step0": {
+      "title": "Legal & Business Infrastructure",
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["business_structure", "taxes", "insurance", "data_protection", "ip_protection", "banking_payments", "compliance_calendar"],
+      "properties": {
+        "business_structure": { "enum": ["sole_proprietor", "llc", "ltd", "gmbh", "corp", "other"] },
+        "jurisdiction": { "type": "string" },
+        "taxes": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["vat_gst_status", "international_notes"],
+          "properties": {
+            "vat_gst_status": { "enum": ["not_registered", "registered", "threshold_monitoring"] },
+            "international_notes": { "type": "string" }
+          }
+        },
+        "insurance": { "type": "array", "minItems": 1, "items": { "enum": ["professional_liability", "cyber", "general", "equipment", "other"] } },
+        "data_protection": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["dpia_required", "dpia_status"],
+          "properties": {
+            "dpia_required": { "type": "boolean", "default": false },
+            "dpia_status": { "enum": ["not-required", "todo", "in-progress", "complete"], "default": "not-required" }
+          }
+        },
+        "ip_protection": { "type": "array", "items": { "enum": ["copyright", "trademark", "nda_practices", "license_policy"] } },
+        "banking_payments": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["business_account", "processors"],
+          "properties": {
+            "business_account": { "type": "string" },
+            "processors": { "type": "array", "minItems": 1, "items": { "enum": ["stripe", "paypal", "wise", "payoneer", "bank_transfer", "other"] } }
+          }
+        },
+        "compliance_calendar": { "type": "array", "items": { "type": "string" } }
+      }
+    },
+
+    "step1": {
+      "title": "Niche & Service Definition",
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["niche_shortlist", "selected_niche", "service_packages", "uvp", "delivery_models"],
+      "properties": {
+        "niche_shortlist": { "type": "array", "minItems": 3, "items": { "type": "string" } },
+        "selected_niche": { "type": "string" },
+        "service_packages": {
+          "type": "array",
+          "minItems": 1,
+          "items": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": ["name", "scope", "price_model"],
+            "properties": {
+              "name": { "type": "string" },
+              "scope": { "type": "array", "minItems": 1, "items": { "type": "string" } },
+              "price_model": { "enum": ["hourly", "fixed-price", "retainer", "value-based", "hybrid"] },
+              "price_hint": { "type": "string" }
+            }
+          }
+        },
+        "uvp": { "type": "string" },
+        "delivery_models": { "type": "array", "minItems": 1, "items": { "enum": ["hourly", "fixed-price", "retainer", "value-based", "hybrid"] } }
+      }
+    },
+
+    "step2": {
+      "title": "Market Intelligence",
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["geo_priority", "size_growth", "competitors", "pricing_intel", "opportunity_gaps"],
+      "properties": {
+        "geo_priority": { "type": "array", "minItems": 1, "items": { "type": "string" } },
+        "size_growth": { "type": "string" },
+        "competitors": { "type": "array", "minItems": 5, "items": { "type": "string" } },
+        "pricing_intel": { "type": "string" },
+        "opportunity_gaps": { "type": "array", "minItems": 1, "items": { "type": "string" } }
+      }
+    },
+
+    "step3": {
+      "title": "Client Persona Architecture",
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["personas", "social_personas"],
+      "properties": {
+        "personas": {
+          "type": "array",
+          "minItems": 3,
+          "items": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": ["name", "segment", "pains", "goals", "budget", "channels"],
+            "properties": {
+              "name": { "type": "string" },
+              "segment": { "type": "string" },
+              "pains": { "type": "array", "minItems": 1, "items": { "type": "string" } },
+              "goals": { "type": "array", "minItems": 1, "items": { "type": "string" } },
+              "budget": { "type": "string" },
+              "channels": { "type": "array", "minItems": 1, "items": { "type": "string" } }
+            }
+          }
+        },
+        "social_personas": {
+          "type": "array",
+          "minItems": 3,
+          "items": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": ["label", "primary_platform", "engagement_style"],
+            "properties": {
+              "label": { "type": "string" },
+              "primary_platform": { "enum": ["LinkedIn", "Instagram", "TikTok", "YouTube", "X", "Reddit", "Facebook", "Other"] },
+              "engagement_style": { "type": "string" }
+            }
+          }
+        }
+      }
+    },
+
+    "step4": {
+      "title": "Personal Brand System",
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["positioning", "messaging", "service_solution_map", "pricing_strategy", "portfolio", "social_proof", "link_in_bio", "email_signature", "thought_leadership"],
+      "properties": {
+        "positioning": { "type": "string" },
+        "messaging": { "type": "string" },
+        "service_solution_map": { "type": "array", "items": { "type": "string" } },
+        "pricing_strategy": { "type": "string" },
+        "portfolio": { "type": "array", "minItems": 3, "items": { "type": "string" } },
+        "social_proof": { "type": "array", "items": { "enum": ["case_study", "testimonial", "before_after", "demo"] } },
+        "link_in_bio": { "type": "string" },
+        "email_signature": { "type": "string" },
+        "thought_leadership": { "type": "string" }
+      }
+    },
+
+    "step8": {
+      "title": "Visual Identity System",
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["logo", "palette_typography", "collateral", "templates", "style_guide"],
+      "properties": {
+        "logo": { "type": "string" },
+        "palette_typography": { "type": "string" },
+        "collateral": { "type": "array", "items": { "enum": ["business_cards", "letterhead", "deck", "proposal"] } },
+        "templates": { "type": "array", "items": { "enum": ["social", "case_study", "invoice", "proposal"] } },
+        "style_guide": { "type": "string" }
+      }
+    },
+
+    "step5": {
+      "title": "Technology Stack",
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["project_management", "communication", "financial", "time_tracking", "contracts_esign", "storage", "security", "crm"],
+      "properties": {
+        "project_management": { "enum": ["ClickUp", "Notion", "Asana", "Jira", "Other"] },
+        "communication": { "type": "array", "items": { "enum": ["Zoom", "Meet", "Slack", "Loom", "Email"] } },
+        "financial": { "type": "array", "items": { "enum": ["QuickBooks", "FreshBooks", "Wave", "Xero", "Other"] } },
+        "time_tracking": { "enum": ["Toggl", "Harvest", "Clockify", "Other"] },
+        "contracts_esign": { "enum": ["DocuSign", "PandaDoc", "HelloSign", "Other"] },
+        "storage": { "enum": ["Google Drive", "Dropbox", "OneDrive", "Self-hosted", "Other"] },
+        "security": { "type": "array", "items": { "enum": ["VPN", "Password Manager", "2FA", "Encrypted Mail", "Device Encryption"] } },
+        "crm": { "enum": ["HubSpot", "Pipedrive", "Airtable", "Simple CRM", "None"] }
+      }
+    },
+
+    "step5a": {
+      "title": "Financial Management System",
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["pricing_calculator", "budget_plan", "cashflow_projection", "multi_currency", "expense_tracking", "tax_prep", "profit_monitoring", "runway_strategy"],
+      "properties": {
+        "pricing_calculator": { "type": "string" },
+        "budget_plan": { "type": "string" },
+        "cashflow_projection": { "type": "string" },
+        "multi_currency": { "type": "boolean", "default": false },
+        "expense_tracking": { "type": "string" },
+        "tax_prep": { "type": "string" },
+        "profit_monitoring": { "type": "string" },
+        "runway_strategy": { "type": "string" }
+      }
+    },
+
+    "step6": {
+      "title": "AI Workflow Optimization",
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["assistants", "prompt_library", "ethics_policy"],
+      "properties": {
+        "assistants": {
+          "type": "array",
+          "minItems": 2,
+          "items": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": ["name", "purpose", "system_prompt"],
+            "properties": {
+              "name": { "type": "string" },
+              "purpose": { "enum": ["proposal", "contract_review", "client_comms", "content", "research", "admin"] },
+              "system_prompt": { "type": "string" },
+              "guardrails": { "type": "array", "items": { "type": "string" } }
+            }
+          }
+        },
+        "prompt_library": { "type": "array", "items": { "type": "string" } },
+        "ethics_policy": { "type": "string" }
+      }
+    },
+
+    "step7": {
+      "title": "Project Management Framework",
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["templates_per_service", "agile_adaptation", "milestones_acceptance", "collab_workspace", "change_request", "risk_register"],
+      "properties": {
+        "templates_per_service": { "type": "array", "minItems": 1, "items": { "type": "string" } },
+        "agile_adaptation": { "type": "string" },
+        "milestones_acceptance": { "type": "array", "minItems": 1, "items": { "type": "string" } },
+        "collab_workspace": { "type": "string" },
+        "change_request": { "type": "string" },
+        "risk_register": { "type": "array", "items": { "type": "string" } }
+      }
+    },
+
+    "step7a": {
+      "title": "Contracts & Agreements",
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["msa", "sow", "nda", "contractor_agreement", "payment_terms", "ip_assignment", "termination_dispute", "jurisdiction_law"],
+      "properties": {
+        "msa": { "type": "string" },
+        "sow": { "type": "string" },
+        "nda": { "enum": ["mutual", "one-way", "both"] },
+        "contractor_agreement": { "type": "string" },
+        "payment_terms": { "type": "string" },
+        "ip_assignment": { "type": "string" },
+        "termination_dispute": { "type": "string" },
+        "jurisdiction_law": { "type": "string" }
+      }
+    },
+
+    "step9": {
+      "title": "Marketplace Strategy",
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["platforms", "profiles", "portfolio_strategy", "pricing_by_platform", "seo_tactics", "reviews_strategy"],
+      "properties": {
+        "platforms": { "type": "array", "minItems": 2, "items": { "enum": ["Upwork", "Fiverr", "Toptal", "Contra", "Malt", "Specialized", "Other"] } },
+        "profiles": { "type": "array", "minItems": 1, "items": { "type": "string" } },
+        "portfolio_strategy": { "type": "string" },
+        "pricing_by_platform": { "type": "string" },
+        "seo_tactics": { "type": "string" },
+        "reviews_strategy": { "type": "string" }
+      }
+    },
+
+    "step9a": {
+      "title": "Sales & Lead Generation System",
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["inbound", "outbound", "sales_process"],
+      "properties": {
+        "inbound": { "type": "array", "items": { "enum": ["website", "blog", "case_studies", "lead_magnet", "seo"] } },
+        "outbound": { "type": "array", "items": { "enum": ["cold_email", "linkedin_dm", "referrals", "events"] } },
+        "sales_process": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["discovery_framework", "needs_assessment", "proposal_system", "pricing_presentation", "objection_handling", "followup_cadence"],
+          "properties": {
+            "discovery_framework": { "type": "string" },
+            "needs_assessment": { "type": "string" },
+            "proposal_system": { "type": "string" },
+            "pricing_presentation": { "type": "string" },
+            "objection_handling": { "type": "string" },
+            "followup_cadence": { "type": "string" }
+          }
+        }
+      }
+    },
+
+    "step10": {
+      "title": "Social Media Ecosystem",
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["platform_priority", "profiles", "content_strategy", "posting_schedule", "community"],
+      "properties": {
+        "platform_priority": { "type": "array", "minItems": 1, "items": { "enum": ["LinkedIn", "Instagram", "TikTok", "YouTube", "X", "Reddit", "Facebook", "Other"] } },
+        "profiles": { "type": "array", "minItems": 1, "items": { "type": "string" } },
+        "content_strategy": { "type": "string" },
+        "posting_schedule": { "type": "string" },
+        "community": { "type": "string" }
+      }
+    },
+
+    "step11": {
+      "title": "Marketing & Promotion",
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["paid_ads", "content_marketing", "productized_services", "email_marketing", "roadmap_6m"],
+      "properties": {
+        "paid_ads": {
+          "type": "object",
+          "additionalProperties": false,
+          "properties": {
+            "channels": { "type": "array", "items": { "enum": ["Google Ads", "LinkedIn Ads", "Meta Ads", "YouTube Ads", "Other"] } },
+            "budget_plan": { "type": "string" },
+            "free_credits": { "type": "string" },
+            "ab_testing": { "type": "string" }
+          }
+        },
+        "content_marketing": { "type": "array", "items": { "enum": ["blog", "guest_posts", "podcasts", "youtube"] } },
+        "productized_services": { "type": "array", "items": { "type": "string" } },
+        "email_marketing": { "type": "string" },
+        "roadmap_6m": { "type": "string" }
+      }
+    },
+
+    "step12": {
+      "title": "Strategic Networking",
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["communities", "associations", "coworking", "conferences", "partnerships", "mentorship"],
+      "properties": {
+        "communities": { "type": "array", "items": { "type": "string" } },
+        "associations": { "type": "array", "items": { "type": "string" } },
+        "coworking": { "type": "string" },
+        "conferences": { "type": "array", "items": { "type": "string" } },
+        "partnerships": { "type": "array", "items": { "type": "string" } },
+        "mentorship": { "type": "string" }
+      }
+    },
+
+    "step13": {
+      "title": "Client Experience System",
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["onboarding", "ongoing_management", "quality_assurance", "offboarding"],
+      "properties": {
+        "onboarding": { "type": "array", "items": { "enum": ["welcome_packet", "kickoff_agenda", "expectations", "comms_protocol"] } },
+        "ongoing_management": { "type": "array", "items": { "enum": ["status_cadence", "feedback_loops", "escalation"] } },
+        "quality_assurance": { "type": "array", "items": { "enum": ["delivery_checklist", "revision_policy", "satisfaction_measure"] } },
+        "offboarding": { "type": "array", "items": { "enum": ["closure_checklist", "handoff", "testimonial_request", "upsell_offer"] } }
+      }
+    },
+
+    "step14": {
+      "title": "Performance & Optimization",
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["kpi_dashboard", "monthly_review", "skill_gap", "service_refinement", "positioning_review"],
+      "properties": {
+        "kpi_dashboard": { "type": "array", "minItems": 3, "items": { "enum": ["mrr", "avg_project_value", "ltv", "utilization", "profitability", "conversion_rate", "cac", "lead_sources", "satisfaction", "retention", "referral_rate"] } },
+        "monthly_review": { "type": "string" },
+        "skill_gap": { "type": "string" },
+        "service_refinement": { "type": "string" },
+        "positioning_review": { "type": "string" }
+      }
+    },
+
+    "step15": {
+      "title": "Scaling Strategy",
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["capacity", "pricing_adjustments", "waitlist", "scaling_models", "passive_income"],
+      "properties": {
+        "capacity": { "type": "string" },
+        "pricing_adjustments": { "type": "string" },
+        "waitlist": { "type": "string" },
+        "scaling_models": { "type": "array", "items": { "enum": ["done_with_you", "done_for_you", "do_it_yourself"] } },
+        "passive_income": { "type": "array", "items": { "enum": ["digital_products", "affiliate", "membership"] } }
+      }
+    },
+
+    "step16": {
+      "title": "Risk Management & Contingency",
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["client_risks", "operational_risks", "financial_risks"],
+      "properties": {
+        "client_risks": { "type": "array", "items": { "enum": ["non_payment", "scope_creep", "difficult_client", "dispute"] } },
+        "operational_risks": { "type": "array", "items": { "enum": ["health_backup", "dr_backup", "device_failure"] } },
+        "financial_risks": { "type": "array", "items": { "enum": ["income_volatility", "client_concentration"] } }
+      }
+    }
+  }
+}
