@@ -1,1 +1,61 @@
+{
+  "compile_checks": [
+    { "path": "/step1/niche_shortlist", "min_items": 5, "error": "Provide ≥5 candidate niches." },
+    { "path": "/step1/selected_niche", "must_exist": true, "error": "Select a target niche." },
 
+    { "path": "/step2/opportunity_gaps/content_gaps", "min_items": 1, "error": "List content gaps (≥1)." },
+    { "path": "/step2/opportunity_gaps/product_gaps", "min_items": 1, "error": "List product/service gaps (≥1)." },
+    { "path": "/step2/opportunity_gaps/monetization_gaps", "min_items": 1, "error": "List monetization gaps (≥1)." },
+
+    { "path": "/step3/consumer_personas", "min_items": 3, "error": "Add ≥3 consumer personas." },
+    { "path": "/step3/social_personas", "min_items": 3, "error": "Add ≥3 social personas." },
+
+    { "path": "/step4/tier1_competitors", "min_items": 8, "error": "Profile ≥8 Tier-1 competitors." },
+    { "path": "/step4/positioning_statement", "must_exist": true, "error": "Provide a positioning statement." },
+
+    { "path": "/step5/networks", "min_items": 3, "error": "Select ≥3 affiliate networks." },
+    { "path": "/step5/programs", "min_items": 5, "error": "List ≥5 affiliate programs." },
+
+    { "path": "/step7/email_marketing/unsubscribe_mechanism", "must_be_true": true, "error": "Email must include an unsubscribe mechanism." },
+    { "path": "/step7/email_marketing/physical_address_in_footer", "must_be_true": true, "error": "Email must include a physical address (CAN-SPAM/GDPR)." },
+
+    { "path": "/step9/content_templates", "min_items": 3, "error": "Define ≥3 content templates." },
+    { "path": "/step9/backlog", "min_items": 10, "error": "Seed backlog with ≥10 items." },
+
+    { "path": "/step10/quality_standards/update_interval_days", "min_value": 30, "error": "Set update interval ≥30 days." },
+
+    { "path": "/step11/seo_plan", "must_exist": true, "error": "Add the SEO plan." },
+    { "path": "/step11/cro_plan", "must_exist": true, "error": "Add the CRO plan." }
+  ],
+
+  "gates": [
+    {
+      "when": { "path": "/meta/eu_privacy", "equals": true },
+      "require": { "path": "/step6/privacy_security/dpia_status", "equals": "complete" },
+      "error": "EU project requires a completed DPIA before Launch."
+    },
+    {
+      "when_any": [
+        { "path": "/step9/backlog[*]/affiliate_links_used", "equals": true }
+      ],
+      "require_all": [
+        { "path": "/step6/legal_compliance/ftc_disclosure_in_place", "equals": true },
+        { "path": "/step6/legal_compliance/disclosure_page_url", "exists": true }
+      ],
+      "error": "FTC disclosure must be in place (and disclosure page set) before publishing affiliate content."
+    },
+    {
+      "when": { "path": "/step8/ai_media/use_ai_realistic_media", "equals": true },
+      "require": { "path": "/step8/ai_media/ai_disclosure_in_place", "equals": true },
+      "error": "Realistic AI-generated media requires an AI disclosure before Launch."
+    }
+  ],
+
+  "success_criteria": [
+    { "path": "/step5/programs[*]/cookie_days", "count_gte": { "value_at_least": 30, "min": 3 }, "warn": "Aim for ≥3 programs with ≥30-day cookies." },
+    { "path": "/step5/programs[*]/commission_model", "distinct_min": 2, "warn": "Mix models (recurring + one-time) to diversify income." },
+    { "path": "/step7/analytics", "min_items": 1, "warn": "Enable at least one privacy-respecting analytics tool." },
+    { "path": "/step9/site_architecture", "contains_all": ["about", "privacy", "disclosure"], "warn": "Add About, Privacy, and Disclosure pages for trust and compliance." },
+    { "path": "/step10/distribution/social_channels", "min_items": 2, "warn": "Distribute across ≥2 social channels to diversify traffic." }
+  ]
+}
