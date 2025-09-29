@@ -1,1 +1,17 @@
-
+{
+  "meta": { "name": "SM — Beauty", "goal": "€3k/mo", "region": "NL", "language": "en", "eu_privacy": false },
+  "step1": { "niche_shortlist": ["Beauty","Skincare","Makeup","Hair","Nails"], "selected_niche":"Beauty", "service_packages":[{"tier":"Starter","price_range":"€1–2k","scope":["10 posts"],"cadence":"10/mo"}] },
+  "step2": { "client_personas":[{"name":"Owner","company_size":"1","budget_band":"€1–2k","pains":[],"success_metrics":[],"decision_process":"owner"}], "social_personas":[{"label":"Fans","primary_platform":"Instagram","engagement_triggers":[],"conversion_path":"DMs"}], "mappings":[] },
+  "step3": { "tier1": [], "positioning_axes": [], "positioning_statement": "" },
+  "step4": { "brand_identity": {}, "pillars": [], "profiles": [] },
+  "step5": {
+    "entity": {"type":"Sole Proprietor"},
+    "contracts": ["MSA"],
+    "privacy": { "dpia_required": false, "dpia_status": "not-required", "data_map": [] },
+    "disclosures": { "sponsored_content": true, "ftc_disclosure_in_place": false, "ai_realistic_content": true, "ai_disclosure_in_place": false }
+  },
+  "step7": { "prioritization": [], "profiles": [] },
+  "step8": { "archetype_mix": [], "calendar_30d": [{"day":1,"platform":"Instagram","archetype":"promotional","hook":"Buy now","cta":"Shop","ai_generated":true,"ai_realistic_media":true}] },
+  "step9": { "marketplaces": [], "outreach_sequences": [], "inbound_assets": [] },
+  "step11": { "channels": {}, "onboarding": [], "cadence": {}, "reporting": { "kpis": [], "format": "PDF" } }
+}
