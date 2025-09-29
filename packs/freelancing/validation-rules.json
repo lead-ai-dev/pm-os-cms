@@ -1,1 +1,99 @@
+{
+  "compile_checks": [
+    { "path": "/step0/business_structure", "must_exist": true, "error": "Select a business structure." },
+    { "path": "/step0/insurance", "min_items": 1, "error": "Add at least one insurance policy." },
+    { "path": "/step0/banking_payments/processors", "min_items": 1, "error": "Add at least one payment processor." },
 
+    { "path": "/step1/niche_shortlist", "min_items": 3, "error": "Provide ≥3 candidate niches." },
+    { "path": "/step1/selected_niche", "must_exist": true, "error": "Select a target niche." },
+    { "path": "/step1/service_packages", "min_items": 1, "error": "Define at least one service package." },
+
+    { "path": "/step2/competitors", "min_items": 5, "error": "Profile ≥5 competitors in the selected market." },
+    { "path": "/step2/opportunity_gaps", "min_items": 1, "error": "List ≥1 opportunity gap." },
+
+    { "path": "/step3/personas", "min_items": 3, "error": "Add ≥3 client personas." },
+    { "path": "/step3/social_personas", "min_items": 3, "error": "Add ≥3 social personas." },
+
+    { "path": "/step4/portfolio", "min_items": 3, "error": "Add ≥3 portfolio/case study items." },
+    { "path": "/step4/link_in_bio", "must_exist": true, "error": "Provide a link-in-bio or landing URL." },
+
+    { "path": "/step5/project_management", "must_exist": true, "error": "Choose a project management tool." },
+    { "path": "/step5/contracts_esign", "must_exist": true, "error": "Choose a contracts/e-sign tool." },
+    { "path": "/step5/security", "min_items": 1, "error": "Add at least one security measure (VPN/2FA/etc.)." },
+
+    { "path": "/step5a/pricing_calculator", "must_exist": true, "error": "Provide a pricing calculator or method." },
+    { "path": "/step5a/cashflow_projection", "must_exist": true, "error": "Provide a cash flow projection plan." },
+
+    { "path": "/step6/assistants", "min_items": 2, "error": "Configure ≥2 AI assistants." },
+    { "path": "/step6/ethics_policy", "must_exist": true, "error": "Document an AI ethics & disclosure policy." },
+
+    { "path": "/step7/templates_per_service", "min_items": 1, "error": "Add ≥1 project template per service." },
+    { "path": "/step7/milestones_acceptance", "min_items": 1, "error": "Define acceptance criteria/milestones." },
+
+    { "path": "/step7a/msa", "must_exist": true, "error": "Attach or reference the Master Service Agreement." },
+    { "path": "/step7a/sow", "must_exist": true, "error": "Attach or reference the Statement of Work." },
+    { "path": "/step7a/payment_terms", "must_exist": true, "error": "Define payment terms and late fee policy." },
+
+    { "path": "/step9/platforms", "min_items": 2, "error": "Select ≥2 marketplaces to start." },
+    { "path": "/step9a/inbound", "min_items": 1, "error": "Add at least one inbound channel." },
+    { "path": "/step9a/outbound", "min_items": 1, "error": "Add at least one outbound channel." },
+    { "path": "/step9a/sales_process/discovery_framework", "must_exist": true, "error": "Define your discovery call framework." },
+
+    { "path": "/step10/platform_priority", "min_items": 1, "error": "Select at least one social platform to prioritize." },
+
+    { "path": "/step11/content_marketing", "min_items": 1, "error": "Add at least one content marketing channel." },
+    { "path": "/step11/roadmap_6m", "must_exist": true, "error": "Provide a 6-month marketing roadmap." },
+
+    { "path": "/step13/onboarding", "min_items": 1, "error": "Add at least one onboarding element (welcome/kickoff/etc.)." },
+    { "path": "/step13/quality_assurance", "min_items": 1, "error": "Add at least one QA element (checklist/revisions/etc.)." },
+
+    { "path": "/step14/kpi_dashboard", "min_items": 3, "error": "Select ≥3 KPIs for your dashboard." },
+
+    { "path": "/step15/scaling_models", "min_items": 1, "error": "Choose at least one scaling model." },
+
+    { "path": "/step16/client_risks", "min_items": 1, "error": "Add at least one client risk & mitigation." }
+  ],
+
+  "gates": [
+    {
+      "when": { "path": "/meta/eu_privacy", "equals": true },
+      "require": { "path": "/step0/data_protection/dpia_status", "equals": "complete" },
+      "error": "EU project requires a completed DPIA (Step 0) before Launch."
+    },
+    {
+      "when_any": [
+        { "path": "/step5/banking_payments", "exists": true }
+      ],
+      "require_all": [
+        { "path": "/step0/banking_payments/business_account", "exists": true },
+        { "path": "/step0/banking_payments/processors", "exists": true }
+      ],
+      "error": "Payments require a business account and at least one processor configured (Step 0)."
+    },
+    {
+      "when": { "path": "/step7a", "exists": true },
+      "require_all": [
+        { "path": "/step7a/msa", "exists": true },
+        { "path": "/step7a/sow", "exists": true },
+        { "path": "/step7a/payment_terms", "exists": true }
+      ],
+      "error": "Contracts gate: MSA, SOW, and payment terms are required before taking any paid work."
+    },
+    {
+      "when_any": [
+        { "path": "/step11/paid_ads/channels[*]", "exists": true }
+      ],
+      "require": { "path": "/step11/paid_ads/budget_plan", "exists": true },
+      "error": "Paid advertising requires a budget plan."
+    }
+  ],
+
+  "success_criteria": [
+    { "path": "/step1/service_packages[*]/price_model", "distinct_min": 2, "warn": "Use ≥2 pricing models (e.g., fixed + retainer) to diversify offers." },
+    { "path": "/step2/competitors", "count_gte": { "value_at_least": 10, "min": 1 }, "warn": "Benchmark against ≥10 competitors as you scale." },
+    { "path": "/step4/portfolio", "count_gte": { "value_at_least": 5, "min": 1 }, "warn": "Target ≥5 portfolio items for stronger proof." },
+    { "path": "/step5/security", "min_items": 2, "warn": "Adopt ≥2 security measures (e.g., 2FA + password manager)." },
+    { "path": "/step9/platforms", "min_items": 3, "warn": "Consider 3+ marketplaces to broaden reach." },
+    { "path": "/step14/kpi_dashboard", "contains_all": ["utilization", "profitability", "conversion_rate"], "warn": "Track utilization, profitability, and conversion rate for health." }
+  ]
+}
