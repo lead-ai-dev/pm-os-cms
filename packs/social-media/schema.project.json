@@ -1,1 +1,457 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://example.org/packs/social-media/schema.project.json",
+  "title": "Social Media Freelancing Project",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["meta", "step1", "step2", "step3", "step4", "step5", "step7", "step8", "step9", "step11"],
+  "properties": {
+    "meta": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["name", "goal", "region", "language", "eu_privacy"],
+      "properties": {
+        "name": { "type": "string", "minLength": 2 },
+        "goal": { "type": "string", "description": "Primary 90-day outcome/North Star" },
+        "region": { "type": "string", "description": "Primary operating country/market" },
+        "language": { "type": "string", "default": "en" },
+        "eu_privacy": { "type": "boolean", "default": false },
+        "notes": { "type": "string" },
+        "_provenance": {
+          "type": "object",
+          "additionalProperties": false,
+          "properties": {
+            "schema_version": { "type": "string", "default": "1.0.0" },
+            "pack_id": { "type": "string", "default": "social-media-v1" },
+            "created_at": { "type": "string", "format": "date-time" },
+            "model_used": { "type": "string" },
+            "input_hash": { "type": "string" }
+          }
+        }
+      }
+    },
 
+    "step1": {
+      "title": "Strategic Niche & Validation",
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["niche_shortlist", "selected_niche", "service_packages"],
+      "properties": {
+        "niche_shortlist": {
+          "type": "array",
+          "minItems": 5,
+          "items": { "type": "string" },
+          "description": "AI-generated shortlist of high-potential niches"
+        },
+        "validation": {
+          "type": "object",
+          "additionalProperties": false,
+          "properties": {
+            "google_trends_notes": { "type": "string" },
+            "social_listening_notes": { "type": "string" },
+            "tam_sam_som": { "type": "string" },
+            "competition_density": { "type": "string" },
+            "monetization_score": { "type": "integer", "minimum": 1, "maximum": 10 },
+            "threshold": { "type": "string", "default": "Proceed if ≥7/10 monetization & ≥3 validation signals" },
+            "evidence_links": { "type": "array", "items": { "type": "string" } }
+          }
+        },
+        "selected_niche": { "type": "string" },
+        "service_packages": {
+          "type": "array",
+          "minItems": 1,
+          "items": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": ["tier", "price_range", "scope", "cadence"],
+            "properties": {
+              "tier": { "enum": ["Starter", "Growth", "Premium"] },
+              "price_range": { "type": "string", "description": "e.g., $1,500–$3,000/mo" },
+              "scope": { "type": "array", "items": { "type": "string" } },
+              "cadence": { "type": "string", "description": "e.g., 20–30 posts/mo" },
+              "add_ons": { "type": "array", "items": { "type": "string" } }
+            }
+          }
+        }
+      }
+    },
+
+    "step2": {
+      "title": "Audience Intelligence & Personas",
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["client_personas", "social_personas", "mappings"],
+      "properties": {
+        "client_personas": {
+          "type": "array",
+          "minItems": 3,
+          "items": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": ["name", "company_size", "budget_band", "pains", "success_metrics", "decision_process"],
+            "properties": {
+              "name": { "type": "string" },
+              "company_size": { "type": "string" },
+              "budget_band": { "type": "string" },
+              "pains": { "type": "array", "items": { "type": "string" } },
+              "success_metrics": { "type": "array", "items": { "type": "string" } },
+              "decision_process": { "type": "string" },
+              "channels": { "type": "array", "items": { "type": "string" } }
+            }
+          }
+        },
+        "social_personas": {
+          "type": "array",
+          "minItems": 3,
+          "items": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": ["label", "primary_platform", "engagement_triggers", "conversion_path"],
+            "properties": {
+              "label": { "type": "string" },
+              "primary_platform": { "enum": ["Instagram", "TikTok", "YouTube", "LinkedIn", "Facebook", "Reddit", "Pinterest", "X"] },
+              "peak_times": { "type": "string" },
+              "content_preferences": { "type": "array", "items": { "type": "string" } },
+              "engagement_triggers": { "type": "array", "items": { "type": "string" } },
+              "conversion_path": { "type": "string" }
+            }
+          }
+        },
+        "mappings": {
+          "type": "array",
+          "description": "Persona journey maps & platform fit",
+          "items": { "type": "string" }
+        }
+      }
+    },
+
+    "step3": {
+      "title": "Competitive Intelligence & Positioning",
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["tier1", "positioning_axes", "positioning_statement"],
+      "properties": {
+        "tier1": {
+          "type": "array",
+          "minItems": 8,
+          "items": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": ["name", "offer", "pricing_hint", "platform_focus", "strengths", "weaknesses"],
+            "properties": {
+              "name": { "type": "string" },
+              "offer": { "type": "string" },
+              "pricing_hint": { "type": "string" },
+              "platform_focus": { "type": "array", "items": { "type": "string" } },
+              "strengths": { "type": "array", "items": { "type": "string" } },
+              "weaknesses": { "type": "array", "items": { "type": "string" } }
+            }
+          }
+        },
+        "positioning_axes": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": ["axis", "low", "high"],
+            "properties": {
+              "axis": { "enum": ["Specialization", "Price", "Scope", "Platform Focus", "Industry Expertise"] },
+              "low": { "type": "string" },
+              "high": { "type": "string" }
+            }
+          }
+        },
+        "positioning_statement": { "type": "string", "description": "Unique value proposition & messaging keys" }
+      }
+    },
+
+    "step4": {
+      "title": "Personal Brand & Authority",
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["brand_identity", "pillars", "profiles"],
+      "properties": {
+        "brand_identity": {
+          "type": "object",
+          "additionalProperties": false,
+          "properties": {
+            "name_choice": { "enum": ["Personal", "Agency"] },
+            "tone": { "type": "string" },
+            "palette": { "type": "string" },
+            "logo_idea": { "type": "string" }
+          }
+        },
+        "pillars": { "type": "array", "minItems": 4, "items": { "type": "string" } },
+        "profiles": {
+          "type": "array",
+          "minItems": 2,
+          "items": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": ["platform", "handle", "bio"],
+            "properties": {
+              "platform": { "enum": ["LinkedIn", "Instagram", "TikTok", "YouTube", "X", "Facebook", "Reddit"] },
+              "handle": { "type": "string" },
+              "bio": { "type": "string" },
+              "link_in_bio": { "type": "string" }
+            }
+          }
+        }
+      }
+    },
+
+    "step5": {
+      "title": "Legal, Compliance & Risk",
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["entity", "contracts", "privacy", "disclosures"],
+      "properties": {
+        "entity": {
+          "type": "object",
+          "additionalProperties": false,
+          "properties": {
+            "type": { "enum": ["Sole Proprietor", "LLC", "S-Corp", "Other"] },
+            "ein": { "type": "string" },
+            "insurance": { "type": "array", "items": { "enum": ["GL", "E&O", "Cyber"] } }
+          }
+        },
+        "contracts": {
+          "type": "array",
+          "items": { "enum": ["MSA", "SOW", "NDA", "Subcontractor Agreement", "Content Rights Agreement"] }
+        },
+        "privacy": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["dpia_status", "data_map"],
+          "properties": {
+            "dpia_required": { "type": "boolean", "default": false },
+            "dpia_status": { "enum": ["not-required", "todo", "in-progress", "complete"], "default": "not-required" },
+            "data_map": {
+              "type": "array",
+              "items": {
+                "type": "object",
+                "additionalProperties": false,
+                "required": ["data", "location"],
+                "properties": {
+                  "data": { "type": "string" },
+                  "location": { "type": "string" },
+                  "retention": { "type": "string" }
+                }
+              }
+            }
+          }
+        },
+        "disclosures": {
+          "type": "object",
+          "additionalProperties": false,
+          "properties": {
+            "sponsored_content": { "type": "boolean", "default": false },
+            "ftc_disclosure_in_place": { "type": "boolean", "default": false },
+            "ai_realistic_content": { "type": "boolean", "default": false },
+            "ai_disclosure_in_place": { "type": "boolean", "default": false }
+          }
+        }
+      }
+    },
+
+    "step6": {
+      "title": "AI Workflow & Tooling",
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "tools": { "type": "array", "items": { "type": "string" } },
+        "assistants": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": ["name", "purpose", "system_prompt"],
+            "properties": {
+              "name": { "type": "string" },
+              "purpose": { "enum": ["ideation", "captioning", "video-script", "qa", "reporting"] },
+              "system_prompt": { "type": "string" },
+              "guardrails": { "type": "array", "items": { "type": "string" } }
+            }
+          }
+        },
+        "multi_agent_flow": { "type": "array", "items": { "type": "string" } }
+      }
+    },
+
+    "step7": {
+      "title": "Platform Strategy & Setup",
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["prioritization", "profiles", "setup_checklists"],
+      "properties": {
+        "prioritization": {
+          "type": "array",
+          "minItems": 1,
+          "items": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": ["platform", "effort_split"],
+            "properties": {
+              "platform": { "enum": ["Instagram", "TikTok", "YouTube", "LinkedIn", "Facebook", "Reddit", "Pinterest", "X", "Google Business"] },
+              "effort_split": { "type": "integer", "minimum": 0, "maximum": 100 }
+            }
+          }
+        },
+        "profiles": {
+          "type": "array",
+          "minItems": 2,
+          "items": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": ["platform", "status"],
+            "properties": {
+              "platform": { "enum": ["Instagram", "TikTok", "YouTube", "LinkedIn", "Facebook", "Reddit", "Pinterest", "X", "Google Business"] },
+              "status": { "enum": ["planned", "draft", "published"] },
+              "seo_keywords": { "type": "array", "items": { "type": "string" } }
+            }
+          }
+        },
+        "setup_checklists": { "type": "array", "items": { "type": "string" } }
+      }
+    },
+
+    "step8": {
+      "title": "Content Calendar & Storytelling",
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["archetype_mix", "calendar_30d"],
+      "properties": {
+        "archetype_mix": {
+          "type": "array",
+          "minItems": 5,
+          "items": { "enum": ["educational", "social-proof", "bts", "engagement", "promotional", "curated", "entertaining", "collaborative"] }
+        },
+        "calendar_30d": {
+          "type": "array",
+          "minItems": 15,
+          "items": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": ["day", "platform", "archetype", "hook", "cta"],
+            "properties": {
+              "day": { "type": "integer", "minimum": 1, "maximum": 31 },
+              "platform": { "enum": ["Instagram", "TikTok", "YouTube", "LinkedIn", "Facebook", "Reddit", "Pinterest", "X"] },
+              "archetype": { "enum": ["educational", "social-proof", "bts", "engagement", "promotional", "curated", "entertaining", "collaborative"] },
+              "hook": { "type": "string" },
+              "cta": { "type": "string" },
+              "ai_generated": { "type": "boolean", "default": false },
+              "ai_realistic_media": { "type": "boolean", "default": false }
+            }
+          }
+        }
+      }
+    },
+
+    "step9": {
+      "title": "Client Acquisition & Marketplaces",
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["marketplaces", "outreach_sequences", "inbound_assets"],
+      "properties": {
+        "marketplaces": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": ["name", "status"],
+            "properties": {
+              "name": { "enum": ["Upwork", "Fiverr", "Contra", "Malt", "Toptal", "Gun.io", "PeoplePerHour", "Other"] },
+              "profile_url": { "type": "string" },
+              "status": { "enum": ["planned", "draft", "published"] },
+              "optimization_notes": { "type": "string" }
+            }
+          }
+        },
+        "outreach_sequences": {
+          "type": "array",
+          "items": { "type": "string" }
+        },
+        "inbound_assets": {
+          "type": "array",
+          "items": { "enum": ["lead_magnet", "case_study", "seo_blog", "webinar", "newsletter", "media_kit"] }
+        }
+      }
+    },
+
+    "step10": {
+      "title": "Monetization & Revenue Diversification",
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "retainers": { "type": "string", "description": "MRR targets and terms" },
+        "one_time_services": { "type": "array", "items": { "type": "string" } },
+        "digital_products": { "type": "array", "items": { "type": "string" } },
+        "community_membership": { "type": "string" },
+        "affiliate_sponsorship": { "type": "string" },
+        "high_ticket": { "type": "string" }
+      }
+    },
+
+    "step11": {
+      "title": "Communication Systems & Client Experience",
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["channels", "onboarding", "cadence", "reporting"],
+      "properties": {
+        "channels": {
+          "type": "object",
+          "additionalProperties": false,
+          "properties": {
+            "realtime": { "type": "array", "items": { "enum": ["Slack", "Discord", "WhatsApp", "SMS"] } },
+            "project": { "type": "array", "items": { "enum": ["Email", "Asana", "Trello", "Monday", "Notion"] } },
+            "video": { "type": "array", "items": { "enum": ["Zoom", "Google Meet"] } }
+          }
+        },
+        "onboarding": { "type": "array", "items": { "type": "string" } },
+        "cadence": {
+          "type": "object",
+          "additionalProperties": false,
+          "properties": {
+            "daily": { "type": "string" },
+            "weekly": { "type": "string" },
+            "monthly": { "type": "string" },
+            "quarterly": { "type": "string" }
+          }
+        },
+        "reporting": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["kpis", "format"],
+          "properties": {
+            "kpis": { "type": "array", "minItems": 5, "items": { "type": "string" } },
+            "format": { "enum": ["PDF", "Dashboard", "Loom+Slides"] }
+          }
+        }
+      }
+    },
+
+    "step12": {
+      "title": "Networking, Community & Growth",
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "communities": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": ["name", "type"],
+            "properties": {
+              "name": { "type": "string" },
+              "type": { "enum": ["group", "forum", "paid-community", "event", "association"] },
+              "url": { "type": "string" },
+              "cadence": { "type": "string" }
+            }
+          }
+        },
+        "events": { "type": "array", "items": { "type": "string" } },
+        "learning_plan": { "type": "array", "items": { "type": "string" } }
+      }
+    }
+  }
+}
