@@ -1,1 +1,33 @@
-
+{
+  "meta": {
+    "name": "Freelance UX Sprint",
+    "goal": "Land 2 paid sprints",
+    "region": "NL",
+    "language": "en",
+    "eu_privacy": true
+  },
+  "step1": { "niche": "B2B SaaS", "services": [{"name":"UX audit","outcome":"activation"}] },
+  "step2": { "overview":"...", "opportunities":["..."], "gaps":["..."], "needs":["..."] },
+  "step3": { "regular_personas":[{"name":"PM","segment":"SaaS","pains":[],"goals":[],"budget_range":"€2–3k"}], "social_personas":[] },
+  "step4": {
+    "description":"...", "value_prop":"...", "services_as_solutions":["..."],
+    "pricing":{"tiers":[{"name":"Sprint","model":"fixed-price","price":"€2,500"}]},
+    "branding":{}, "portfolio":[{"title":"A","evidence_type":"demo"},{"title":"B","evidence_type":"demo"},{"title":"C","evidence_type":"demo"}],
+    "availability":"...", "link_bio":"...", "email_signature":"..."
+  },
+  "step5": {
+    "project_management":"Notion",
+    "communication":{},
+    "invoicing":"Wave", "payments":"Stripe", "service_tools":[], "work_tracking":"Toggl",
+    "security_privacy":{
+      "dpia_required":true,
+      "dpia_status":"todo",
+      "data_map":[{"data":"client emails","location":"Notion","retention":"12m"}]
+    }
+  },
+  "step7": {
+    "platform":"Notion",
+    "backlog":[{"title":"Heuristic review","acceptance_criteria":["..."]}],
+    "definition_of_done":["..."]
+  }
+}
