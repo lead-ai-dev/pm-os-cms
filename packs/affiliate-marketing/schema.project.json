@@ -1,1 +1,471 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://example.org/packs/affiliate-marketing/schema.project.json",
+  "title": "Affiliate Marketing Project",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["meta", "step1", "step2", "step3", "step4", "step5", "step7", "step9", "step10", "step11"],
+  "properties": {
+    "meta": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["name", "goal", "region", "language", "eu_privacy"],
+      "properties": {
+        "name": { "type": "string", "minLength": 2 },
+        "goal": { "type": "string", "description": "Primary 90-day outcome/North Star" },
+        "region": { "type": "string", "description": "Primary operating country/market" },
+        "language": { "type": "string", "default": "en" },
+        "eu_privacy": { "type": "boolean", "default": false },
+        "notes": { "type": "string" },
+        "_provenance": {
+          "type": "object",
+          "additionalProperties": false,
+          "properties": {
+            "schema_version": { "type": "string", "default": "1.0.0" },
+            "pack_id": { "type": "string", "default": "affiliate-marketing-v1" },
+            "created_at": { "type": "string", "format": "date-time" },
+            "model_used": { "type": "string" },
+            "input_hash": { "type": "string" }
+          }
+        }
+      }
+    },
 
+    "step1": {
+      "title": "Strategic Niche & Targeting",
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["niche_shortlist", "selected_niche", "geo_strategy", "validation"],
+      "properties": {
+        "niche_shortlist": { "type": "array", "minItems": 5, "items": { "type": "string" } },
+        "selected_niche": { "type": "string" },
+        "product_focus": {
+          "type": "array",
+          "items": { "enum": ["physical", "digital", "saas", "services", "hybrid"] }
+        },
+        "geo_strategy": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["primary_market"],
+          "properties": {
+            "primary_market": { "enum": ["US", "UK", "EU", "CA", "AU", "Global", "Other"] },
+            "currencies": { "type": "array", "items": { "type": "string" } }
+          }
+        },
+        "validation": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["demand_signals", "monetization_signals", "competition_level", "threshold"],
+          "properties": {
+            "demand_signals": {
+              "type": "object",
+              "additionalProperties": false,
+              "properties": {
+                "google_trends_notes": { "type": "string" },
+                "keyword_volume_summary": { "type": "string" },
+                "seasonality_notes": { "type": "string" }
+              }
+            },
+            "monetization_signals": {
+              "type": "object",
+              "additionalProperties": false,
+              "properties": {
+                "program_count_estimate": { "type": "integer", "minimum": 0 },
+                "avg_commission_hint": { "type": "string" },
+                "cookie_hint": { "type": "string" }
+              }
+            },
+            "competition_level": { "enum": ["low", "medium", "high"] },
+            "threshold": { "type": "string", "default": "Proceed if demand high/steady, ≥5 viable programs, medium competition or unique angle." },
+            "evidence_links": { "type": "array", "items": { "type": "string" } }
+          }
+        }
+      }
+    },
+
+    "step2": {
+      "title": "Market Intelligence & Opportunity",
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["tam_sam_som", "consumer_behaviour", "opportunity_gaps"],
+      "properties": {
+        "tam_sam_som": {
+          "type": "object",
+          "additionalProperties": false,
+          "properties": {
+            "tam": { "type": "string" },
+            "sam": { "type": "string" },
+            "som": { "type": "string" },
+            "growth_outlook": { "type": "string" }
+          }
+        },
+        "consumer_behaviour": {
+          "type": "object",
+          "additionalProperties": false,
+          "properties": {
+            "aov": { "type": "string" },
+            "purchase_frequency": { "type": "string" },
+            "decision_timeline": { "type": "string" },
+            "price_sensitivity": { "type": "string" },
+            "seasonality": { "type": "string" }
+          }
+        },
+        "opportunity_gaps": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["content_gaps", "product_gaps", "monetization_gaps"],
+          "properties": {
+            "content_gaps": { "type": "array", "items": { "type": "string" } },
+            "product_gaps": { "type": "array", "items": { "type": "string" } },
+            "monetization_gaps": { "type": "array", "items": { "type": "string" } }
+          }
+        }
+      }
+    },
+
+    "step3": {
+      "title": "Audience Personas",
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["consumer_personas", "social_personas", "content_mapping"],
+      "properties": {
+        "consumer_personas": {
+          "type": "array",
+          "minItems": 3,
+          "items": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": ["name", "demographics", "psychographics", "behaviours", "pain_points", "triggers"],
+            "properties": {
+              "name": { "type": "string" },
+              "demographics": { "type": "string" },
+              "psychographics": { "type": "string" },
+              "behaviours": { "type": "string" },
+              "pain_points": { "type": "array", "items": { "type": "string" } },
+              "triggers": { "type": "array", "items": { "type": "string" } }
+            }
+          }
+        },
+        "social_personas": {
+          "type": "array",
+          "minItems": 3,
+          "items": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": ["label", "primary_platform", "engagement_style", "share_triggers"],
+            "properties": {
+              "label": { "type": "string" },
+              "primary_platform": { "enum": ["Instagram", "TikTok", "YouTube", "LinkedIn", "X", "Reddit", "Pinterest", "Facebook"] },
+              "engagement_style": { "type": "string" },
+              "share_triggers": { "type": "array", "items": { "type": "string" } }
+            }
+          }
+        },
+        "content_mapping": { "type": "array", "items": { "type": "string" } }
+      }
+    },
+
+    "step4": {
+      "title": "Competitive Landscape & Positioning",
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["tier1_competitors", "positioning_axes", "positioning_statement"],
+      "properties": {
+        "tier1_competitors": {
+          "type": "array",
+          "minItems": 8,
+          "items": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": ["name", "offer", "pricing_hint", "content_strategy", "strengths", "weaknesses"],
+            "properties": {
+              "name": { "type": "string" },
+              "offer": { "type": "string" },
+              "pricing_hint": { "type": "string" },
+              "content_strategy": { "type": "string" },
+              "strengths": { "type": "array", "items": { "type": "string" } },
+              "weaknesses": { "type": "array", "items": { "type": "string" } }
+            }
+          }
+        },
+        "positioning_axes": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": ["axis", "low", "high"],
+            "properties": {
+              "axis": { "enum": ["Specialization", "Price", "Depth", "Audience Level", "Format"] },
+              "low": { "type": "string" },
+              "high": { "type": "string" }
+            }
+          }
+        },
+        "positioning_statement": { "type": "string" }
+      }
+    },
+
+    "step5": {
+      "title": "Networks & Programs",
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["networks", "programs", "commission_strategy"],
+      "properties": {
+        "networks": {
+          "type": "array",
+          "minItems": 3,
+          "items": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": ["name", "status"],
+            "properties": {
+              "name": { "enum": ["Amazon", "ShareASale", "CJ", "Rakuten", "PartnerStack", "Impact", "Awin", "ClickBank", "Other"] },
+              "status": { "enum": ["applied", "approved", "live"] },
+              "notes": { "type": "string" }
+            }
+          }
+        },
+        "programs": {
+          "type": "array",
+          "minItems": 5,
+          "items": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": ["brand", "category", "commission_model", "commission_value", "cookie_days", "tracking_features"],
+            "properties": {
+              "brand": { "type": "string" },
+              "category": { "type": "string" },
+              "commission_model": { "enum": ["pps", "ppl", "ppc", "recurring", "hybrid"] },
+              "commission_value": { "type": "string", "description": "e.g., 30% recurring 12m or $150 flat" },
+              "cookie_days": { "type": "integer", "minimum": 0 },
+              "tracking_features": { "type": "array", "items": { "enum": ["cross-device", "deep-linking", "api", "s2s"] } },
+              "epc_hint": { "type": "string" }
+            }
+          }
+        },
+        "commission_strategy": {
+          "type": "object",
+          "additionalProperties": false,
+          "properties": {
+            "mix_plan": { "type": "string", "description": "e.g., 60% recurring, 30% high one-time, 10% tests" },
+            "max_single_program_share": { "type": "integer", "minimum": 0, "maximum": 100, "default": 30 }
+          }
+        }
+      }
+    },
+
+    "step6": {
+      "title": "Brand & Trust",
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "brand_identity": {
+          "type": "object",
+          "additionalProperties": false,
+          "properties": {
+            "name_type": { "enum": ["Personal", "Brand"] },
+            "tone": { "type": "string" },
+            "logo_idea": { "type": "string" }
+          }
+        },
+        "trust_foundation": {
+          "type": "object",
+          "additionalProperties": false,
+          "properties": {
+            "about_page": { "type": "string" },
+            "testing_methodology": { "type": "string" },
+            "update_policy": { "type": "string" }
+          }
+        },
+        "legal_compliance": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["ftc_disclosure_in_place", "disclosure_page_url"],
+          "properties": {
+            "ftc_disclosure_in_place": { "type": "boolean", "default": false },
+            "disclosure_page_url": { "type": "string" }
+          }
+        },
+        "privacy_security": {
+          "type": "object",
+          "additionalProperties": false,
+          "properties": {
+            "dpia_required": { "type": "boolean", "default": false },
+            "dpia_status": { "enum": ["not-required", "todo", "in-progress", "complete"], "default": "not-required" },
+            "data_map": {
+              "type": "array",
+              "items": {
+                "type": "object",
+                "additionalProperties": false,
+                "required": ["data", "location"],
+                "properties": {
+                  "data": { "type": "string" },
+                  "location": { "type": "string" },
+                  "retention": { "type": "string" }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+
+    "step7": {
+      "title": "Tools & Technology",
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["cms", "analytics", "link_management", "email_marketing"],
+      "properties": {
+        "cms": { "type": "string", "description": "e.g., WordPress, Static, Headless" },
+        "hosting": { "type": "string" },
+        "seo_tools": { "type": "array", "items": { "type": "string" } },
+        "analytics": { "type": "array", "items": { "enum": ["GA4", "Plausible", "Matomo", "Simple Analytics", "Other"] } },
+        "link_management": { "type": "string", "description": "e.g., Pretty Links, custom redirector" },
+        "email_marketing": {
+          "type": "object",
+          "additionalProperties": false,
+          "properties": {
+            "provider": { "type": "string" },
+            "double_opt_in": { "type": "boolean", "default": true },
+            "unsubscribe_mechanism": { "type": "boolean", "default": true },
+            "physical_address_in_footer": { "type": "boolean", "default": true }
+          }
+        }
+      }
+    },
+
+    "step8": {
+      "title": "AI Workflow",
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "assistants": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": ["name", "purpose", "system_prompt"],
+            "properties": {
+              "name": { "type": "string" },
+              "purpose": { "enum": ["research", "outline", "draft", "edit", "review", "schema-fill", "link-audit"] },
+              "system_prompt": { "type": "string" },
+              "guardrails": { "type": "array", "items": { "type": "string" } }
+            }
+          }
+        },
+        "ai_media": {
+          "type": "object",
+          "additionalProperties": false,
+          "properties": {
+            "use_ai_realistic_media": { "type": "boolean", "default": false },
+            "ai_disclosure_in_place": { "type": "boolean", "default": false }
+          }
+        }
+      }
+    },
+
+    "step9": {
+      "title": "Project Structure & Editorial",
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["site_architecture", "content_templates", "backlog"],
+      "properties": {
+        "site_architecture": { "type": "array", "items": { "enum": ["home", "categories", "reviews", "comparisons", "guides", "deals", "about", "privacy", "disclosure"] } },
+        "content_templates": {
+          "type": "array",
+          "minItems": 3,
+          "items": { "enum": ["review", "comparison", "buyers_guide", "how_to", "news", "deal_page"] }
+        },
+        "backlog": {
+          "type": "array",
+          "minItems": 10,
+          "items": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": ["title", "type", "acceptance_criteria"],
+            "properties": {
+              "title": { "type": "string" },
+              "type": { "enum": ["review", "comparison", "buyers_guide", "how_to", "news", "deal_page"] },
+              "acceptance_criteria": { "type": "array", "items": { "type": "string" } },
+              "affiliate_links_used": { "type": "boolean", "default": false }
+            }
+          }
+        },
+        "calendar_90d": { "type": "array", "items": { "type": "string" } }
+      }
+    },
+
+    "step10": {
+      "title": "Content Production & Distribution",
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["production_workflow", "distribution", "quality_standards"],
+      "properties": {
+        "production_workflow": { "type": "array", "items": { "type": "string" } },
+        "distribution": {
+          "type": "object",
+          "additionalProperties": false,
+          "properties": {
+            "social_channels": { "type": "array", "items": { "type": "string" } },
+            "email_newsletter": { "type": "string" },
+            "syndication_targets": { "type": "array", "items": { "type": "string" } }
+          }
+        },
+        "quality_standards": {
+          "type": "object",
+          "additionalProperties": false,
+          "properties": {
+            "original_research_required": { "type": "boolean", "default": true },
+            "expert_review_required": { "type": "boolean", "default": false },
+            "update_interval_days": { "type": "integer", "minimum": 0, "default": 180 }
+          }
+        }
+      }
+    },
+
+    "step11": {
+      "title": "Traffic, CRO & Advertising",
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["seo_plan", "email_plan", "cro_plan"],
+      "properties": {
+        "seo_plan": { "type": "string" },
+        "email_plan": { "type": "string" },
+        "paid_ads": {
+          "type": "object",
+          "additionalProperties": false,
+          "properties": {
+            "channels": { "type": "array", "items": { "enum": ["Google Ads", "Meta", "LinkedIn", "Reddit", "TikTok", "X"] } },
+            "budget_hint": { "type": "string" },
+            "policies_checked": { "type": "boolean", "default": false }
+          }
+        },
+        "cro_plan": { "type": "string" }
+      }
+    },
+
+    "step12": {
+      "title": "Partnerships, Community & Growth",
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "affiliate_manager_contacts": { "type": "array", "items": { "type": "string" } },
+        "influencer_collabs": { "type": "array", "items": { "type": "string" } },
+        "communities": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": ["name", "type"],
+            "properties": {
+              "name": { "type": "string" },
+              "type": { "enum": ["group", "forum", "association", "event", "newsletter"] },
+              "url": { "type": "string" },
+              "cadence": { "type": "string" }
+            }
+          }
+        }
+      }
+    }
+  }
+}
