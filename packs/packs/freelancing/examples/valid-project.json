@@ -1,0 +1,169 @@
+{
+  "meta": {
+    "name": "Acme Freelance",
+    "goal_90d": "Land 3 retainers",
+    "region": "EU",
+    "language": "en",
+    "eu_privacy": true
+  },
+  "step1": {
+    "niche_shortlist": ["B2B websites", "SaaS landing pages", "Legal sites"],
+    "selected_niche": "SaaS landing pages",
+    "service_packages": [
+      { "name": "Starter", "scope": ["Landing page"], "price_model": "fixed-price", "price_hint": "€1500–€2500" }
+    ],
+    "uvp": "Faster landing pages that convert",
+    "delivery_models": ["fixed-price", "retainer"]
+  },
+  "step2": {
+    "geo_priority": ["EU"],
+    "size_growth": "Growing niche",
+    "competitors": ["A", "B", "C", "D", "E"],
+    "pricing_intel": "Mid-market",
+    "opportunity_gaps": ["GDPR-ready templates"]
+  },
+  "step3": {
+    "personas": [
+      { "name": "SaaS Founder", "segment": "B2B SaaS", "pains": ["Low conversion"], "goals": ["Signups"], "budget": "€2k–€5k", "channels": ["LinkedIn"] }
+    ],
+    "social_personas": [
+      { "label": "SaaS LI", "primary_platform": "LinkedIn", "engagement_style": "Authority threads" }
+    ]
+  },
+  "step4": {
+    "positioning": "Conversion-first SaaS pages",
+    "messaging": "Ship pages that sell",
+    "service_solution_map": ["Audit → Wireframe → Build → Test"],
+    "pricing_strategy": "Tiered + retainer",
+    "portfolio": ["Case 1", "Case 2", "Case 3"],
+    "social_proof": ["case_study", "testimonial"],
+    "link_in_bio": "https://example.com",
+    "email_signature": "Jane Doe — Conversion Designer",
+    "thought_leadership": "Weekly posts"
+  },
+  "step5": {
+    "project_management": "Notion",
+    "communication": ["Zoom", "Email"],
+    "financial": ["Wave"],
+    "time_tracking": "Toggl",
+    "contracts_esign": "PandaDoc",
+    "storage": "Google Drive",
+    "security": ["2FA", "Password Manager"],
+    "crm": "HubSpot"
+  },
+  "step5a": {
+    "pricing_calculator": "cost+margin sheet",
+    "budget_plan": "monthly budget",
+    "cashflow_projection": "12-month sheet",
+    "multi_currency": true,
+    "expense_tracking": "Wave",
+    "tax_prep": "CPA",
+    "profit_monitoring": "Monthly review",
+    "runway_strategy": "3-month reserve"
+  },
+  "step6": {
+    "assistants": [
+      { "name": "ProposalBot", "purpose": "proposal", "system_prompt": "Draft proposals from discovery notes" },
+      { "name": "ClientComms", "purpose": "client_comms", "system_prompt": "Summarize meetings and next steps" }
+    ],
+    "prompt_library": ["value prop", "scope to proposal"],
+    "ethics_policy": "Disclose AI assistance; no client PII to third-party models without consent."
+  },
+  "step7": {
+    "templates_per_service": ["LP build template"],
+    "agile_adaptation": "Kanban + weekly demo",
+    "milestones_acceptance": ["Wireframe signoff", "Content lock", "Go-live"],
+    "collab_workspace": "Notion workspace",
+    "change_request": "CR form + impact",
+    "risk_register": ["Scope creep"]
+  },
+  "step7a": {
+    "msa": "link-to-msa",
+    "sow": "link-to-sow",
+    "nda": "mutual",
+    "contractor_agreement": "link",
+    "payment_terms": "50% upfront, 50% delivery",
+    "ip_assignment": "Client owns final",
+    "termination_dispute": "Mediation then arbitration",
+    "jurisdiction_law": "NL"
+  },
+  "step8": {
+    "logo": "tbd",
+    "palette_typography": "tbd",
+    "collateral": ["deck", "proposal"],
+    "templates": ["invoice", "case_study"],
+    "style_guide": "tbd"
+  },
+  "step9": {
+    "platforms": ["Upwork", "Malt"],
+    "profiles": ["/acme"],
+    "portfolio_strategy": "Best-first",
+    "pricing_by_platform": "Premium on Malt",
+    "seo_tactics": "Long-tail niches",
+    "reviews_strategy": "Ask on project win"
+  },
+  "step9a": {
+    "inbound": ["website", "seo"],
+    "outbound": ["cold_email", "linkedin_dm"],
+    "sales_process": {
+      "discovery_framework": "BANT",
+      "needs_assessment": "Checklist",
+      "proposal_system": "PandaDoc",
+      "pricing_presentation": "Deck",
+      "objection_handling": "FAQ",
+      "followup_cadence": "3-7-14"
+    }
+  },
+  "step10": {
+    "platform_priority": ["LinkedIn"],
+    "profiles": ["/jane-doe"],
+    "content_strategy": "Authority + case studies",
+    "posting_schedule": "3x/week",
+    "community": "DMs + comments"
+  },
+  "step11": {
+    "paid_ads": {
+      "channels": ["LinkedIn Ads"],
+      "budget_plan": "€500/m",
+      "free_credits": "",
+      "ab_testing": "Headlines & offers"
+    },
+    "content_marketing": ["blog", "youtube"],
+    "productized_services": ["LP sprint"],
+    "email_marketing": "Monthly newsletter",
+    "roadmap_6m": "Gradual raise in prices"
+  },
+  "step12": {
+    "communities": ["LI groups"],
+    "associations": ["local design guild"],
+    "coworking": "hub-xyz",
+    "conferences": ["SaaStock"],
+    "partnerships": ["dev shop"],
+    "mentorship": "mentor-x"
+  },
+  "step13": {
+    "onboarding": ["welcome_packet", "kickoff_agenda"],
+    "ongoing_management": ["status_cadence", "feedback_loops"],
+    "quality_assurance": ["delivery_checklist", "revision_policy"],
+    "offboarding": ["handoff", "testimonial_request"]
+  },
+  "step14": {
+    "kpi_dashboard": ["utilization", "profitability", "conversion_rate"],
+    "monthly_review": "retro",
+    "skill_gap": "seo",
+    "service_refinement": "split test offers",
+    "positioning_review": "quarterly"
+  },
+  "step15": {
+    "capacity": "2 concurrent projects",
+    "pricing_adjustments": "+15% next quarter",
+    "waitlist": "Typeform",
+    "scaling_models": ["done_with_you"],
+    "passive_income": ["digital_products"]
+  },
+  "step16": {
+    "client_risks": ["non_payment"],
+    "operational_risks": ["device_failure"],
+    "financial_risks": ["income_volatility"]
+  }
+}
