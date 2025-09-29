@@ -1,1 +1,57 @@
+{
+  "compile_checks": [
+    { "path": "/step1/niche_shortlist", "min_items": 5, "error": "Provide ≥5 candidate niches." },
+    { "path": "/step1/selected_niche", "must_exist": true, "error": "Select one target niche to proceed." },
+    { "path": "/step1/service_packages", "min_items": 1, "error": "Define at least one service package." },
 
+    { "path": "/step2/client_personas", "min_items": 3, "error": "Add ≥3 client personas." },
+    { "path": "/step2/social_personas", "min_items": 3, "error": "Add ≥3 social audience personas." },
+
+    { "path": "/step3/tier1", "min_items": 8, "error": "Profile ≥8 direct competitors for Tier 1 analysis." },
+    { "path": "/step3/positioning_statement", "must_exist": true, "error": "Provide a clear positioning statement." },
+
+    { "path": "/step4/pillars", "min_items": 4, "error": "Define ≥4 expertise pillars." },
+    { "path": "/step4/profiles", "min_items": 2, "error": "Optimize at least two public profiles." },
+
+    { "path": "/step5/contracts", "min_items": 2, "error": "Attach/select at least two contract types (e.g., MSA + SOW)." },
+    { "path": "/step5/privacy/dpia_status", "allowed": ["not-required", "todo", "in-progress", "complete"], "error": "Invalid DPIA status." },
+
+    { "path": "/step7/prioritization", "min_items": 1, "error": "Prioritize at least one platform." },
+    { "path": "/step7/profiles", "min_items": 2, "error": "Set up at least two platform profiles." },
+
+    { "path": "/step8/archetype_mix", "min_items": 5, "error": "Select at least five content archetypes." },
+    { "path": "/step8/calendar_30d", "min_items": 15, "error": "Plan at least 15 posts in the 30-day calendar." },
+
+    { "path": "/step9/marketplaces", "min_items": 1, "error": "Add at least one marketplace profile." },
+
+    { "path": "/step11/reporting/kpis", "min_items": 5, "error": "Track at least five KPIs in reporting." }
+  ],
+
+  "gates": [
+    {
+      "when": { "path": "/meta/eu_privacy", "equals": true },
+      "require": { "path": "/step5/privacy/dpia_status", "equals": "complete" },
+      "error": "EU project requires a completed DPIA before Launch."
+    },
+    {
+      "when": { "path": "/step5/disclosures/sponsored_content", "equals": true },
+      "require": { "path": "/step5/disclosures/ftc_disclosure_in_place", "equals": true },
+      "error": "Sponsored content detected: FTC disclosure required before Launch."
+    },
+    {
+      "when_any": [
+        { "path": "/step8/calendar_30d[*]/ai_realistic_media", "equals": true },
+        { "path": "/step5/disclosures/ai_realistic_content", "equals": true }
+      ],
+      "require": { "path": "/step5/disclosures/ai_disclosure_in_place", "equals": true },
+      "error": "Realistic AI-generated media requires platform-specific AI disclosure before Launch."
+    }
+  ],
+
+  "success_criteria": [
+    { "path": "/step7/profiles[*]/status", "count_equals": { "value": "published", "min": 2 }, "warn": "Publish at least two platform profiles for meaningful reach." },
+    { "path": "/step8/calendar_30d[*]/platform", "distinct_min": 2, "warn": "Ship content to at least two platforms to diversify reach." },
+    { "path": "/step9/marketplaces[*]/status", "count_equals": { "value": "published", "min": 1 }, "warn": "Publish at least one marketplace profile to enable early lead flow." },
+    { "path": "/step1/service_packages[*]/tier", "distinct_min": 2, "warn": "Offer at least two package tiers (e.g., Starter + Growth) to capture different budgets." }
+  ]
+}
