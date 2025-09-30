@@ -4,13 +4,14 @@ Executable Project Operating System
 
 ### Privacy-first, self-managed, market-friendly.
 
-Think CI/CD for business ideas. Your project plan must compile before you can launch.
+- Think CI/CD for business ideas. Your project plan must compile before you can launch.
 
 #### 1. Projects-as-Code
 Define projects using JSON Schemas—structured, typed, versionable.
 
 #### 2. 12-Step Validation Gates
-Progress through guided steps. Can't advance to Step N+1 until Step N validates.
+
+- Progress through guided steps. Can't advance to Step N+1 until Step N validates.
 
 #### 3. Compile-Time Enforcement
 
