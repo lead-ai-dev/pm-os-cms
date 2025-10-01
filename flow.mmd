@@ -1,0 +1,73 @@
+flowchart TD
+    Start([Freelancer Starts Project]) --> Select[Select Freelancing Pack]
+    Select --> Meta[Fill Meta Information<br/>Name, Goal, Region, EU Privacy Flag]
+    
+    Meta --> S1[Step 1: Niche & Services<br/>Define services and delivery models]
+    S1 --> S2[Step 2: Market Overview<br/>Opportunities, Gaps, Needs]
+    S2 --> S3[Step 3: Personas<br/>≥3 Regular + ≥3 Social personas]
+    S3 --> S4[Step 4: Personal Brand<br/>Portfolio ≥3, Pricing Tiers ≥1]
+    S4 --> S5[Step 5: Operating Stack<br/>Tools, DPIA Status]
+    
+    S5 --> Compile{Compile Project}
+    
+    Compile -->|Validation Check| Rules[Apply Validation Rules<br/>- Services ≥1<br/>- Personas ≥6<br/>- Portfolio ≥3<br/>- Pricing defined]
+    
+    Rules -->|Check Gates| Gate{EU Privacy Gate}
+    Gate -->|EU=true| DPIACheck{DPIA Complete?}
+    Gate -->|EU=false| PassGate[Gate Passed]
+    
+    DPIACheck -->|No| Fail1[❌ Compilation Failed<br/>Error: DPIA Required]
+    DPIACheck -->|Yes| PassGate
+    
+    Fail1 --> Fix1[Fix: Complete DPIA]
+    Fix1 --> S5
+    
+    Rules -->|Validation Errors| Fail2[❌ Show Specific Errors<br/>e.g., '/step3/personas needs 3']
+    Fail2 --> Fix2[Fix Missing Fields]
+    Fix2 --> S1
+    
+    PassGate --> S6[Continue Optional Steps<br/>6: AI Assistants<br/>7: Project Setup<br/>8: Creatives]
+    
+    S6 --> S9[Step 9: Marketplaces<br/>≥1 Platform Required]
+    S9 --> S10[Step 10: Social Strategy<br/>≥15 posts in calendar]
+    S10 --> S11[Step 11: Marketing & Offers<br/>≥1 Fixed-price offer]
+    S11 --> S12[Step 12: Networking<br/>Communities/Events]
+    
+    S12 --> FinalCompile{Final Compilation}
+    
+    FinalCompile -->|Success| Generate[✅ Generate Artifacts<br/>- Task List<br/>- Risk Matrix<br/>- OKR Sheet<br/>- 30-day Calendar]
+    
+    Generate --> Export{Choose Export Format}
+    Export --> Git[Git Repository]
+    Export --> Notion[Notion CSV]
+    Export --> Jira[Jira JSON]
+    Export --> Web[Web View]
+    
+    FinalCompile -->|Fail| ShowErrors[Show All Errors<br/>With JSON Paths]
+    ShowErrors --> FixFinal[Fix Issues]
+    FixFinal --> S9
+    
+    %% AI Assistant Branch
+    S1 -.->|AI Help| AI{AI Generation}
+    S2 -.->|AI Help| AI
+    S3 -.->|AI Help| AI
+    S4 -.->|AI Help| AI
+    
+    AI -->|Generate| AICheck{Owner Approval<br/>Required?}
+    AICheck -->|Structural Change| Diff[Create Diff<br/>Show Changes]
+    Diff --> Approve{Owner Approves?}
+    Approve -->|Yes| Apply[Apply Changes]
+    Approve -->|No| Discard[Keep Original]
+    AICheck -->|Content Only| Apply
+    
+    Apply -.-> S1
+    Discard -.-> S1
+    
+    style Start fill:#e1f5e1
+    style Generate fill:#c8e6c9
+    style Fail1 fill:#ffcdd2
+    style Fail2 fill:#ffcdd2
+    style ShowErrors fill:#ffcdd2
+    style DPIACheck fill:#fff3e0
+    style Gate fill:#fff3e0
+    style AI fill:#e3f2fd
